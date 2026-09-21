@@ -1,0 +1,116 @@
+{
+  "fixture": "canary",
+  "description": "DESIGN 9.7 canary corpus. No canary may appear in a PublicSummary, the card manifest, any string drawn on the card, terminal output or the ledger. Only the listed exceptions may appear in the local report HTML, and only with --redact off.",
+  "canaries": {
+    "project": {
+      "value": "CANARY-PROJECT-7f3a",
+      "planted": [
+        "projects/ folder name",
+        "cwd"
+      ],
+      "mayAppearIn": [
+        "report HTML when --redact is off"
+      ]
+    },
+    "prompt": {
+      "value": "CANARY-PROMPT-51d0",
+      "planted": [
+        "user prompt text",
+        "user text block"
+      ],
+      "mayAppearIn": []
+    },
+    "title": {
+      "value": "CANARY-TITLE-0b9e",
+      "planted": [
+        "custom-title",
+        "ai-title",
+        "last-prompt",
+        "queue-operation"
+      ],
+      "mayAppearIn": []
+    },
+    "agentName": {
+      "value": "CANARY-AGENTNAME-77aa",
+      "planted": [
+        "agent-name record"
+      ],
+      "mayAppearIn": []
+    },
+    "secret": {
+      "value": "sk-ant-api03-CANARY-x7Qp2Lm9Vt4Rz8Kd1Nw6Hs3Jf5Yb0Gc",
+      "planted": [
+        "Bash tool_result content"
+      ],
+      "mayAppearIn": []
+    },
+    "path": {
+      "value": "CANARY-PATH-91c2",
+      "planted": [
+        "Edit and Write file_path, as a folder above the parent folder (I8 shows only parent/basename, never the full path)"
+      ],
+      "mayAppearIn": []
+    },
+    "mcp": {
+      "value": "CANARY-MCP-3e11",
+      "planted": [
+        "mcp__ tool name",
+        "attributionMcpServer"
+      ],
+      "mayAppearIn": [
+        "report HTML per-server breakdown when --redact is off (see INTERFACES.md open question)"
+      ]
+    },
+    "skill": {
+      "value": "CANARY-SKILL-c4d2",
+      "planted": [
+        "attributionSkill"
+      ],
+      "mayAppearIn": [
+        "report HTML when --redact is off"
+      ]
+    },
+    "attributionAgent": {
+      "value": "CANARY-ATTRAGENT-9a61",
+      "planted": [
+        "attributionAgent"
+      ],
+      "mayAppearIn": [
+        "report HTML when --redact is off"
+      ]
+    },
+    "branch": {
+      "value": "CANARY-BRANCH-2f70",
+      "planted": [
+        "gitBranch"
+      ],
+      "mayAppearIn": []
+    },
+    "assistantText": {
+      "value": "CANARY-ASSISTANT-6c3b",
+      "planted": [
+        "assistant text block"
+      ],
+      "mayAppearIn": []
+    },
+    "toolInput": {
+      "value": "CANARY-TOOLINPUT-e5f8",
+      "planted": [
+        "Bash command",
+        "Write content"
+      ],
+      "mayAppearIn": []
+    }
+  },
+  "responses": 4,
+  "tools": {
+    "calls": 4,
+    "callsByDisplayName": {
+      "Bash": 1,
+      "MCP tools": 1,
+      "Edit": 1,
+      "Write": 1
+    }
+  },
+  "prompts": 2
+}

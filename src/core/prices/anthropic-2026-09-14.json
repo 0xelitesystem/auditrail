@@ -1,0 +1,290 @@
+{
+  "schema": 1,
+  "provider": "anthropic",
+  "fetched": "2026-09-14",
+  "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+  "label": "API-equivalent value at list price",
+  "units": "USD per million tokens",
+  "appliesTo": "V1 prices every event at this one table: list prices as of 2026-09-14, applied to all dates.",
+  "rules": {
+    "modelIds": {
+      "rule": "Normalize before lookup: strip one trailing [...] suffix (for example [1m]), then one trailing -YYYYMMDD date. Match the result EXACTLY against models[].id. Never match by prefix or substring.",
+      "examples": [
+        {
+          "raw": "claude-haiku-4-5-20251001",
+          "normalized": "claude-haiku-4-5"
+        },
+        {
+          "raw": "claude-opus-5[1m]",
+          "normalized": "claude-opus-5"
+        }
+      ],
+      "source": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "fetched": "2026-09-14"
+    },
+    "unknownModel": {
+      "rule": "A model id that is not in models[] after normalization is UNPRICED: its tokens are listed by name in an unpriced bucket. It is never priced at 0 and never guessed.",
+      "notInTable": [
+        "claude-mythos-5 and claude-mythos-5-1: priced like Fable 5 and Fable 5.1 on the pricing page, but their API ids were not verified when this table was fetched",
+        "Claude Opus 4.1 and earlier: older pricing per the page scope note, not captured row by row"
+      ]
+    },
+    "cacheTtl": {
+      "rule": "usage.cache_creation splits cache writes into ephemeral_5m_input_tokens (priced at cacheWrite5m, 1.25x input) and ephemeral_1h_input_tokens (priced at cacheWrite1h, 2x input). When the split disagrees with cache_creation_input_tokens, rescale in integers: w5 = floor(total * s5 / (s5 + s1)), w1 = total - w5. When the split is absent (or all zero while writes exist), price every write at 5m and flag the response ttlEstimated.",
+      "source": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+      "fetched": "2026-09-14"
+    },
+    "cacheReadFootnote": {
+      "rule": "Cache hits and refreshes on Claude Fable 5.1 and Claude Mythos 5.1 are priced at 0.025x the base input price. All other models use the standard 0.1x multiplier.",
+      "models": [
+        "claude-fable-5-1"
+      ],
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "fetched": "2026-09-14"
+    },
+    "iterations": {
+      "rule": "When usage.iterations has more than one entry (refusal fallback), bill every entry at the rates of the model that ran it (entry.model, else the top-level model), skipping an entry only when its output_tokens is 0 and it is not the last entry. The top-level usage describes only the attempt that produced the returned message. With zero or one entry, bill the top-level usage.",
+      "quote": "An attempt that declined before producing any output is not billed: its tokens are reported on its `usage.iterations` entry but not charged. Every attempt that produced output, including one that declined partway through its response, is billed separately at the rates of the model that ran it. The `usage.iterations` array is the per-attempt record of what you're billed.",
+      "source": "https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback",
+      "fetched": "2026-09-14"
+    },
+    "fastMode": {
+      "rule": "usage.speed == \"fast\" on a model whose row has fast rates (Claude Opus 5, Claude Opus 4.8): use the row's fast rates. Input 10 and output 50 are printed on the page; the cache rates are derived from the stated rule that prompt caching multipliers apply on top of fast mode pricing, so they carry derived: true. On Pro and Max plans fast mode is paid from usage credits, so these responses are counted separately.",
+      "source": "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
+      "planNote": "https://code.claude.com/docs/en/fast-mode",
+      "fetched": "2026-09-14"
+    },
+    "inferenceGeo": {
+      "rule": "usage.inference_geo == \"us\" on a row with geoUsMultiplier 1.1 (Claude 4.6 and later): multiply every token category by 1.1, applied per rate as rateMilli * 11 / 10. Any other value (global, not_available, absent) is standard.",
+      "source": "https://platform.claude.com/docs/en/manage-claude/data-residency",
+      "fetched": "2026-09-14"
+    },
+    "webSearch": {
+      "rule": "usage.server_tool_use.web_search_requests: 10 USD per 1,000 requests, added once per response. Web fetch has no extra charge. Claude Code runs most searches as side requests that are not written to the transcript, so this is a lower bound.",
+      "usdPer1000Requests": 10,
+      "source": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool",
+      "fetched": "2026-09-14"
+    },
+    "longContext": {
+      "rule": "No long-context premium on Claude 4.6 and later: the full 1M window bills at standard rates.",
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "fetched": "2026-09-14"
+    },
+    "serviceTier": {
+      "rule": "Batch is 50% off and Priority Tier has no public per-token price. V1 prices every response at standard rates and counts non-standard service_tier values separately.",
+      "source": "https://platform.claude.com/docs/en/api/service-tiers",
+      "fetched": "2026-09-14"
+    },
+    "thinkingTokens": {
+      "rule": "output_tokens_details.thinking_tokens is already inside output_tokens. Breakdown only; never add it."
+    },
+    "tokenizer": {
+      "rule": "Claude 4.7 and later models produce about 30% more tokens for the same text. Cross-model token comparisons carry this caveat.",
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "fetched": "2026-09-14"
+    }
+  },
+  "models": [
+    {
+      "id": "claude-fable-5-1",
+      "displayName": "Claude Fable 5.1",
+      "input": 10,
+      "output": 50,
+      "cacheWrite5m": 12.5,
+      "cacheWrite1h": 20,
+      "cacheRead": 0.25,
+      "fast": null,
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "note": "Cache read is 0.025x input (pricing page footnote 1), not 0.1x.",
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-fable-5",
+      "displayName": "Claude Fable 5",
+      "input": 10,
+      "output": 50,
+      "cacheWrite5m": 12.5,
+      "cacheWrite1h": 20,
+      "cacheRead": 1,
+      "fast": null,
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/models/fable-5/overview",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-opus-5",
+      "displayName": "Claude Opus 5",
+      "input": 5,
+      "output": 25,
+      "cacheWrite5m": 6.25,
+      "cacheWrite1h": 10,
+      "cacheRead": 0.5,
+      "fast": {
+        "input": 10,
+        "output": 50,
+        "cacheWrite5m": 12.5,
+        "cacheWrite1h": 20,
+        "cacheRead": 1,
+        "derived": true
+      },
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/models/opus-5/overview",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-opus-4-8",
+      "displayName": "Claude Opus 4.8",
+      "input": 5,
+      "output": 25,
+      "cacheWrite5m": 6.25,
+      "cacheWrite1h": 10,
+      "cacheRead": 0.5,
+      "fast": {
+        "input": 10,
+        "output": 50,
+        "cacheWrite5m": 12.5,
+        "cacheWrite1h": 20,
+        "cacheRead": 1,
+        "derived": true
+      },
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/models/opus-4-8/overview",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-opus-4-7",
+      "displayName": "Claude Opus 4.7",
+      "input": 5,
+      "output": 25,
+      "cacheWrite5m": 6.25,
+      "cacheWrite1h": 10,
+      "cacheRead": 0.5,
+      "fast": null,
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-opus-4-6",
+      "displayName": "Claude Opus 4.6",
+      "input": 5,
+      "output": 25,
+      "cacheWrite5m": 6.25,
+      "cacheWrite1h": 10,
+      "cacheRead": 0.5,
+      "fast": null,
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-opus-4-5",
+      "displayName": "Claude Opus 4.5",
+      "input": 5,
+      "output": 25,
+      "cacheWrite5m": 6.25,
+      "cacheWrite1h": 10,
+      "cacheRead": 0.5,
+      "fast": null,
+      "geoUsMultiplier": null,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "knownDatedIds": [
+        "claude-opus-4-5-20251101"
+      ],
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-sonnet-5",
+      "displayName": "Claude Sonnet 5",
+      "input": 2,
+      "output": 10,
+      "cacheWrite5m": 2.5,
+      "cacheWrite1h": 4,
+      "cacheRead": 0.2,
+      "fast": null,
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "note": "The page states the 2 / 10 launch price is now the standard price and the planned 2026-09-01 increase to 3 / 15 will not happen.",
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/models/overview",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "displayName": "Claude Sonnet 4.6",
+      "input": 3,
+      "output": 15,
+      "cacheWrite5m": 3.75,
+      "cacheWrite1h": 6,
+      "cacheRead": 0.3,
+      "fast": null,
+      "geoUsMultiplier": 1.1,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-sonnet-4-5",
+      "displayName": "Claude Sonnet 4.5",
+      "input": 3,
+      "output": 15,
+      "cacheWrite5m": 3.75,
+      "cacheWrite1h": 6,
+      "cacheRead": 0.3,
+      "fast": null,
+      "geoUsMultiplier": null,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "knownDatedIds": [
+        "claude-sonnet-4-5-20250929"
+      ],
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "displayName": "Claude Haiku 4.5",
+      "input": 1,
+      "output": 5,
+      "cacheWrite5m": 1.25,
+      "cacheWrite1h": 2,
+      "cacheRead": 0.1,
+      "fast": null,
+      "geoUsMultiplier": null,
+      "effectiveFrom": null,
+      "effectiveUntil": null,
+      "knownDatedIds": [
+        "claude-haiku-4-5-20251001"
+      ],
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "idSource": "https://platform.claude.com/docs/en/models/overview",
+      "fetched": "2026-09-14"
+    }
+  ]
+}

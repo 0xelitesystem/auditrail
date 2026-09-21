@@ -1,0 +1,10 @@
+# Normalize text to LF in the working tree on every OS, so hashes of dist/ and fixtures are stable.
+* text=auto eol=lf
+
+# Generated fixtures are compared byte for byte by `npm run fixtures:check`; some contain CRLF on
+# purpose (parser trap F09). Never convert their line endings.
+test/fixtures/** -text
+
+# Binary assets.
+*.png binary
+*.bin binary

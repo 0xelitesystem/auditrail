@@ -1,0 +1,33 @@
+# Dependencies and build output
+node_modules/
+dist/
+*.tgz
+
+# Never commit real agent transcripts. Only generated fixtures under test/fixtures/ are allowed.
+*.jsonl
+*.jsonl.*
+*.jsonl.zst
+!/test/fixtures/**
+
+# Local outputs of the tool itself
+.auditrail/
+auditrail-*.html
+card*.png
+!/test/**/card*.png
+
+# Test and tool artifacts
+test-results/
+playwright-report/
+coverage/
+.tmp/
+__pycache__/
+*.pyc
+
+# Secrets and editor or OS noise
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

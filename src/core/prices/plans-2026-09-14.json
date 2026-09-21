@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "provider": "anthropic",
+  "fetched": "2026-09-14",
+  "currency": "USD",
+  "use": "Only for the optional value multiple (--plan or --plan-price). A plan is never inferred from the logs.",
+  "note": "Prices exclude tax. Subscription usage is included in the plan, so API-equivalent value is not what a subscriber paid.",
+  "quote": "Claude Max and Pro subscribers have usage included in their subscription, so the session cost figure isn't relevant for billing purposes.",
+  "quoteSource": "https://code.claude.com/docs/en/costs",
+  "apiKeyNote": "If ANTHROPIC_API_KEY is set, Claude Code bills the API instead of the plan.",
+  "apiKeyNoteSource": "https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan",
+  "plans": [
+    {
+      "id": "pro",
+      "displayName": "Pro",
+      "usdPerMonth": 20,
+      "billing": "monthly",
+      "source": "https://claude.com/pricing",
+      "alsoSource": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "pro-annual",
+      "displayName": "Pro (annual)",
+      "usdPerMonth": 17,
+      "usdPerYear": 200,
+      "billing": "annual",
+      "note": "The pricing page shows 17 per month with the annual subscription discount, 200 billed up front.",
+      "source": "https://claude.com/pricing",
+      "alsoSource": "https://support.claude.com/en/articles/11049762-choose-a-claude-plan",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "max5x",
+      "displayName": "Max 5x",
+      "usdPerMonth": 100,
+      "billing": "monthly",
+      "source": "https://support.claude.com/en/articles/11049741-what-is-the-max-plan",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "max20x",
+      "displayName": "Max 20x",
+      "usdPerMonth": 200,
+      "billing": "monthly",
+      "source": "https://support.claude.com/en/articles/11049741-what-is-the-max-plan",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "team",
+      "displayName": "Team standard seat",
+      "usdPerMonth": 25,
+      "usdPerMonthBilledAnnually": 20,
+      "billing": "monthly",
+      "source": "https://claude.com/pricing",
+      "fetched": "2026-09-14"
+    },
+    {
+      "id": "team-premium",
+      "displayName": "Team premium seat",
+      "usdPerMonth": 125,
+      "usdPerMonthBilledAnnually": 100,
+      "billing": "monthly",
+      "source": "https://claude.com/pricing",
+      "fetched": "2026-09-14"
+    }
+  ]
+}

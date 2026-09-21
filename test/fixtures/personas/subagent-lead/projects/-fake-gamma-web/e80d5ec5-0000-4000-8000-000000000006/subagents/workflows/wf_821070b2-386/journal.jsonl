@@ -1,0 +1,6 @@
+{"type":"started","key":"step-0","agentId":"w87b39ee1","label":"fictional step 0","phase":"review"}
+{"type":"result","key":"step-0","agentId":"w87b39ee1","result":{"verdict":"fictional","summary":"fictional workflow result text"}}
+{"type":"started","key":"step-1","agentId":"w86b39d4e","label":"fictional step 1","phase":"review"}
+{"type":"failed","key":"step-1","agentId":"w86b39d4e"}
+{"type":"started","key":"step-2","agentId":"w85b39bbb","label":"fictional step 2","phase":"review"}
+{"type":"result","key":"step-2","agentId":"w85b39bbb","result":{"verdict":"fictional","summary":"fictional workflow result text"}}

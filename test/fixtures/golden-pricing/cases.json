@@ -1,0 +1,391 @@
+{
+  "fixture": "golden-pricing",
+  "note": "Raw Claude Code usage objects with expected integer values. counterfactual cases show what a wrong method would produce and are not written as responses.",
+  "cases": [
+    {
+      "id": "R5",
+      "title": "fallback: Fable 5 attempt billed, then Opus 4.8",
+      "counterfactual": false,
+      "model": "claude-opus-4-8",
+      "normalizedModel": "claude-opus-4-8",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 1000,
+        "output_tokens": 200,
+        "iterations": [
+          {
+            "type": "message",
+            "model": "claude-fable-5",
+            "input_tokens": 1000,
+            "output_tokens": 50
+          },
+          {
+            "type": "fallback_message",
+            "model": "claude-opus-4-8",
+            "input_tokens": 1000,
+            "output_tokens": 200
+          }
+        ]
+      },
+      "billedParts": [
+        {
+          "model": "claude-fable-5",
+          "tokens": {
+            "input": 1000,
+            "output": 50,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "12500000"
+        },
+        {
+          "model": "claude-opus-4-8",
+          "tokens": {
+            "input": 1000,
+            "output": 200,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "10000000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "22500000",
+      "expectedUsd": "$0.0225000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R5-top-level-only",
+      "title": "R5 priced from top-level usage only (wrong)",
+      "counterfactual": true,
+      "model": "claude-opus-4-8",
+      "normalizedModel": "claude-opus-4-8",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 1000,
+        "output_tokens": 200
+      },
+      "billedParts": [
+        {
+          "model": "claude-opus-4-8",
+          "tokens": {
+            "input": 1000,
+            "output": 200,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "10000000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "10000000",
+      "expectedUsd": "$0.0100000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R5b",
+      "title": "declined before output: first attempt not billed",
+      "counterfactual": false,
+      "model": "claude-opus-4-8",
+      "normalizedModel": "claude-opus-4-8",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 800,
+        "output_tokens": 100,
+        "iterations": [
+          {
+            "type": "message",
+            "model": "claude-fable-5",
+            "input_tokens": 800,
+            "output_tokens": 0
+          },
+          {
+            "type": "fallback_message",
+            "model": "claude-opus-4-8",
+            "input_tokens": 800,
+            "output_tokens": 100
+          }
+        ]
+      },
+      "billedParts": [
+        {
+          "model": "claude-opus-4-8",
+          "tokens": {
+            "input": 800,
+            "output": 100,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "6500000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "6500000",
+      "expectedUsd": "$0.0065000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R6",
+      "title": "Fable 5.1 cache read at 0.025x",
+      "counterfactual": false,
+      "model": "claude-fable-5-1",
+      "normalizedModel": "claude-fable-5-1",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 100000,
+        "speed": "standard",
+        "input_tokens": 10,
+        "output_tokens": 100
+      },
+      "billedParts": [
+        {
+          "model": "claude-fable-5-1",
+          "tokens": {
+            "input": 10,
+            "output": 100,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 100000
+          },
+          "valueNano": "30100000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "30100000",
+      "expectedUsd": "$0.0301000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R6-as-fable-5",
+      "title": "R6 mispriced as Fable 5 (prefix match, wrong)",
+      "counterfactual": true,
+      "model": "claude-fable-5",
+      "normalizedModel": "claude-fable-5",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 100000,
+        "speed": "standard",
+        "input_tokens": 10,
+        "output_tokens": 100
+      },
+      "billedParts": [
+        {
+          "model": "claude-fable-5",
+          "tokens": {
+            "input": 10,
+            "output": 100,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 100000
+          },
+          "valueNano": "105100000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "105100000",
+      "expectedUsd": "$0.1051000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R7",
+      "title": "fast mode on Opus 5",
+      "counterfactual": false,
+      "model": "claude-opus-5",
+      "normalizedModel": "claude-opus-5",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "speed": "fast",
+        "input_tokens": 1000,
+        "output_tokens": 1000
+      },
+      "billedParts": [
+        {
+          "model": "claude-opus-5",
+          "tokens": {
+            "input": 1000,
+            "output": 1000,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "60000000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "60000000",
+      "expectedUsd": "$0.0600000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R8",
+      "title": "US inference geo 1.1x",
+      "counterfactual": false,
+      "model": "claude-opus-5",
+      "normalizedModel": "claude-opus-5",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 1000,
+        "output_tokens": 1000,
+        "inference_geo": "us"
+      },
+      "billedParts": [
+        {
+          "model": "claude-opus-5",
+          "tokens": {
+            "input": 1000,
+            "output": 1000,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "33000000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "33000000",
+      "expectedUsd": "$0.0330000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R9",
+      "title": "dated id normalizes to claude-haiku-4-5",
+      "counterfactual": false,
+      "model": "claude-haiku-4-5-20251001",
+      "normalizedModel": "claude-haiku-4-5",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 1000,
+        "output_tokens": 1000
+      },
+      "billedParts": [
+        {
+          "model": "claude-haiku-4-5",
+          "tokens": {
+            "input": 1000,
+            "output": 1000,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "6000000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "6000000",
+      "expectedUsd": "$0.0060000",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R12",
+      "title": "cache split disagrees with total: integer rescale",
+      "counterfactual": false,
+      "model": "claude-opus-5",
+      "normalizedModel": "claude-opus-5",
+      "usage": {
+        "cache_creation_input_tokens": 1000,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 0,
+        "output_tokens": 10,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 300,
+          "ephemeral_1h_input_tokens": 900
+        }
+      },
+      "billedParts": [
+        {
+          "model": "claude-opus-5",
+          "tokens": {
+            "input": 0,
+            "output": 10,
+            "cw5m": 250,
+            "cw1h": 750,
+            "cacheRead": 0
+          },
+          "valueNano": "9312500"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "9312500",
+      "expectedUsd": "$0.0093125",
+      "ttlEstimated": false
+    },
+    {
+      "id": "R13",
+      "title": "no cache split: all writes at 5m, ttlEstimated",
+      "counterfactual": false,
+      "model": "claude-opus-5",
+      "normalizedModel": "claude-opus-5",
+      "usage": {
+        "cache_creation_input_tokens": 1000,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 0,
+        "output_tokens": 10
+      },
+      "billedParts": [
+        {
+          "model": "claude-opus-5",
+          "tokens": {
+            "input": 0,
+            "output": 10,
+            "cw5m": 1000,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": "6500000"
+        }
+      ],
+      "priced": true,
+      "expectedNano": "6500000",
+      "expectedUsd": "$0.0065000",
+      "ttlEstimated": true
+    },
+    {
+      "id": "R10",
+      "title": "unknown model: unpriced, tokens listed",
+      "counterfactual": false,
+      "model": "claude-imaginary-9",
+      "normalizedModel": "claude-imaginary-9",
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "speed": "standard",
+        "input_tokens": 500,
+        "output_tokens": 500
+      },
+      "billedParts": [
+        {
+          "model": "claude-imaginary-9",
+          "tokens": {
+            "input": 500,
+            "output": 500,
+            "cw5m": 0,
+            "cw1h": 0,
+            "cacheRead": 0
+          },
+          "valueNano": null
+        }
+      ],
+      "priced": false,
+      "expectedNano": null,
+      "expectedUsd": null,
+      "ttlEstimated": false
+    }
+  ]
+}

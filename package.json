@@ -1,0 +1,60 @@
+{
+  "name": "auditrail",
+  "version": "0.1.0",
+  "description": "The audit trail your coding agents already wrote, priced at list, ranked by what to fix, and scanned for leaked secrets, entirely on your own machine. API-equivalent value with receipts, a zero-token fix list and a privacy-safe share card. Runs 100% locally.",
+  "type": "module",
+  "bin": {
+    "auditrail": "dist/auditrail.mjs"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "test:browser": "node --test \"test/browser/**/*.pw.js\"",
+    "test:real": "node --test \"test/real/**/*.real.js\"",
+    "build": "node scripts/build.mjs",
+    "demo": "node scripts/make-demo.mjs",
+    "demo:check": "node scripts/make-demo.mjs --check",
+    "fixtures": "node scripts/gen-synthetic.mjs",
+    "fixtures:check": "node scripts/gen-synthetic.mjs --check",
+    "prepublishOnly": "npm test && npm run fixtures:check && npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "playwright": "1.62.1"
+  },
+  "keywords": [
+    "claude-code",
+    "ai-agent",
+    "coding-agent",
+    "agent-audit",
+    "audit-trail",
+    "token-usage",
+    "cost-tracking",
+    "usage",
+    "tokens",
+    "cost",
+    "local-first",
+    "offline",
+    "cli"
+  ],
+  "author": "0xelitesystem",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xelitesystem/auditrail.git"
+  },
+  "homepage": "https://github.com/0xelitesystem/auditrail#readme",
+  "bugs": {
+    "url": "https://github.com/0xelitesystem/auditrail/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

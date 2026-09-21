@@ -1,0 +1,59 @@
+{
+  "fixture": "golden-pricing",
+  "description": "DESIGN 9.3 golden-pricing: one final line per case (fallback iterations, declined attempt, Fable 5.1 reads, fast, US geo, dated id, split rescale, missing split, unknown model).",
+  "tz": "UTC",
+  "scan": {
+    "files": {
+      "main": 1,
+      "subagent": 0,
+      "workflow_agent": 0,
+      "workflow_journal": 0
+    },
+    "parseErrors": 0,
+    "trailingPartial": 0,
+    "oversizeLines": 0
+  },
+  "responses": 9,
+  "incompleteResponses": 0,
+  "sessions": 1,
+  "tokens": {
+    "input": 6310,
+    "output": 3970,
+    "cw5m": 1250,
+    "cw1h": 750,
+    "cacheRead": 100000
+  },
+  "valueNano": "173912500",
+  "valueUsd": "$0.1739125",
+  "responseValueNano": {
+    "msg_p_R5": "22500000",
+    "msg_p_R5b": "6500000",
+    "msg_p_R6": "30100000",
+    "msg_p_R7": "60000000",
+    "msg_p_R8": "33000000",
+    "msg_p_R9": "6000000",
+    "msg_p_R12": "9312500",
+    "msg_p_R13": "6500000",
+    "msg_p_R10": null
+  },
+  "pricedTokens": 111280,
+  "allTokens": 112280,
+  "unpriced": [
+    {
+      "model": "claude-imaginary-9",
+      "responses": 1,
+      "tokens": 1000
+    }
+  ],
+  "modifiers": {
+    "fast": 1,
+    "geoUs": 1,
+    "nonStandardTier": 0,
+    "ttlEstimated": 1,
+    "webSearchRequests": 0
+  },
+  "counterfactualNano": {
+    "R5-top-level-only": "10000000",
+    "R6-as-fable-5": "105100000"
+  }
+}

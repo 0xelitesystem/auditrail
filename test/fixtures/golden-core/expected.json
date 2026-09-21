@@ -1,0 +1,194 @@
+{
+  "fixture": "golden-core",
+  "description": "DESIGN 9.2 golden-core: 4 responses in 18 lines across a main and a subagent file, with a forked copy, a synthetic 429 line, a truncated trailing line and one of each tool status.",
+  "tz": "UTC",
+  "idleMinutes": 15,
+  "scan": {
+    "files": {
+      "main": 1,
+      "subagent": 1,
+      "workflow_agent": 0,
+      "workflow_journal": 0
+    },
+    "linesByClass": {
+      "main": 11,
+      "subagent": 7,
+      "workflow_agent": 0,
+      "workflow_journal": 0
+    },
+    "recordsByClass": {
+      "main": 10,
+      "subagent": 7,
+      "workflow_agent": 0,
+      "workflow_journal": 0
+    },
+    "parseErrors": 0,
+    "trailingPartial": 1,
+    "oversizeLines": 0
+  },
+  "dedup": {
+    "observations": 10,
+    "keys": 4,
+    "gatewayConflicts": 0,
+    "invariantViolations": 0,
+    "forkedKeys": 1,
+    "syntheticLines": 1,
+    "duplicateToolUseIds": 1,
+    "orphanToolResults": 0
+  },
+  "responses": 4,
+  "incompleteResponses": 1,
+  "incompleteShare": 0.25,
+  "sessions": 1,
+  "tokens": {
+    "input": 180,
+    "output": 627,
+    "cw5m": 1000,
+    "cw1h": 2500,
+    "cacheRead": 3000
+  },
+  "cacheWriteTotal": 3500,
+  "pricedTokens": 7307,
+  "allTokens": 7307,
+  "valueNano": "42080000",
+  "valueUsd": "$0.042080",
+  "responseValueNano": {
+    "msg_01": "23500000",
+    "msg_02": "13750000",
+    "msg_03": "4520000",
+    "msg_04": "310000"
+  },
+  "responseClass": {
+    "msg_01": "main",
+    "msg_02": "main",
+    "msg_03": "subagent",
+    "msg_04": "subagent"
+  },
+  "responseComplete": {
+    "msg_01": true,
+    "msg_02": true,
+    "msg_03": true,
+    "msg_04": false
+  },
+  "bucketsNano": {
+    "input": "810000",
+    "output": "12570000",
+    "cw5m": "2500000",
+    "cw1h": "25000000",
+    "cacheRead": "1200000"
+  },
+  "byClassNano": {
+    "main": "37250000",
+    "subagent": "4830000",
+    "workflow_agent": "0"
+  },
+  "byModelNano": {
+    "claude-opus-5": "37250000",
+    "claude-sonnet-5": "4830000"
+  },
+  "delegationShare": {
+    "numNano": "4830000",
+    "denNano": "42080000",
+    "rounded4": 0.1148
+  },
+  "cacheHitRate": {
+    "num": 3000,
+    "den": 6680,
+    "rounded4": 0.4491
+  },
+  "unpriced": [],
+  "modifiers": {
+    "fast": 0,
+    "geoUs": 0,
+    "nonStandardTier": 0,
+    "ttlEstimated": 0,
+    "webSearchRequests": 0
+  },
+  "tools": {
+    "calls": 4,
+    "paired": 3,
+    "status": {
+      "ok": 1,
+      "denied": 1,
+      "shell_exit": 1,
+      "failed": 0,
+      "unpaired": 1
+    },
+    "byId": {
+      "toolu_01": "shell_exit",
+      "toolu_02": "ok",
+      "toolu_03": "denied",
+      "toolu_04": "unpaired"
+    },
+    "callsByName": {
+      "Bash": 1,
+      "Edit": 1,
+      "Write": 1,
+      "Read": 1
+    },
+    "okEditNewLines": 1,
+    "okWriteLines": 0
+  },
+  "time": {
+    "activeSeconds": 1260,
+    "workBlockSeconds": [
+      60,
+      1200
+    ],
+    "agentSeconds": 1620,
+    "agentSecondsByClass": {
+      "main": 780,
+      "subagent": 840,
+      "workflow_agent": 0
+    }
+  },
+  "prompts": 2,
+  "interrupts": 0,
+  "activeDays": [
+    "2026-03-02"
+  ],
+  "longestStreakDays": 1,
+  "peakHourLocal": 9,
+  "rateLimits": {
+    "quotaRejectWindows": 0,
+    "synthetic429Lines": 1,
+    "episodes": 1
+  },
+  "workflows": {
+    "launched": 0,
+    "started": 0,
+    "result": 0,
+    "failed": 0
+  },
+  "coverage": {
+    "earliestMainTs": "2026-03-02T09:00:00.000Z",
+    "earliestAnyTs": "2026-03-02T09:00:00.000Z",
+    "latestTs": "2026-03-02T09:41:00.000Z"
+  },
+  "methods": {
+    "correct": {
+      "valueNano": "42080000",
+      "ratio": 1
+    },
+    "sumEveryLine": {
+      "valueNano": "113495000",
+      "ratio": 2.697
+    },
+    "keepFirstLine": {
+      "valueNano": "29975000",
+      "ratio": 0.712
+    },
+    "dedupPerFile": {
+      "valueNano": "55830000",
+      "ratio": 1.327
+    },
+    "allWritesAt5m": {
+      "valueNano": "32705000",
+      "ratio": 0.777
+    },
+    "mainFilesOnly": {
+      "valueNano": "37250000",
+      "ratio": 0.885
+    }
+  }
+}

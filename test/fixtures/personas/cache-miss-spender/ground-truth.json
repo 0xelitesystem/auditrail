@@ -1,0 +1,235 @@
+{
+  "fixture": "personas/cache-miss-spender",
+  "description": "DESIGN 9.5 persona cache-miss-spender. Ground truth computed from each response's true usage before it was split into lines.",
+  "tz": "UTC",
+  "idleMinutes": 15,
+  "scan": {
+    "files": {
+      "main": 9,
+      "subagent": 2,
+      "workflow_agent": 0,
+      "workflow_journal": 0
+    },
+    "linesByClass": {
+      "main": 204,
+      "subagent": 28,
+      "workflow_agent": 0,
+      "workflow_journal": 0
+    },
+    "parseErrors": 0,
+    "trailingPartial": 0,
+    "oversizeLines": 0
+  },
+  "dedup": {
+    "observations": 145,
+    "keys": 64,
+    "gatewayConflicts": 0,
+    "invariantViolations": 0,
+    "forkedKeys": 3,
+    "syntheticLines": 0,
+    "duplicateToolUseIds": 2,
+    "orphanToolResults": 0
+  },
+  "responses": 64,
+  "incompleteResponses": 0,
+  "sessions": 8,
+  "tokens": {
+    "input": 5955,
+    "output": 51774,
+    "cw5m": 60772,
+    "cw1h": 574648,
+    "cacheRead": 1016618
+  },
+  "valueNano": "14408592700",
+  "responseValueNano": {
+    "msg_cachemisss_00002": "440520000",
+    "msg_cachemisss_00007": "43067000",
+    "msg_cachemisss_00013": "507980000",
+    "msg_cachemisss_00020": "114303000",
+    "msg_cachemisss_00024": "615230000",
+    "msg_cachemisss_00030": "117399000",
+    "msg_cachemisss_00037": "259990000",
+    "msg_cachemisss_00042": "139663000",
+    "msg_cachemisss_00047": "501260000",
+    "msg_cachemisss_00052": "85363000",
+    "msg_cachemisss_00056": "73692000",
+    "msg_cachemisss_00062": "613390000",
+    "msg_cachemisss_00069": "121702000",
+    "msg_cachemisss_00074": "387330000",
+    "msg_cachemisss_00079": "354870000",
+    "msg_cachemisss_00085": "79760000",
+    "msg_cachemisss_00092": "52199000",
+    "msg_cachemisss_00099": "548280000",
+    "msg_cachemisss_00106": "51079600",
+    "msg_cachemisss_00111": "404970000",
+    "msg_cachemisss_00117": "78248000",
+    "msg_cachemisss_00123": "488390000",
+    "msg_cachemisss_00129": "122802000",
+    "msg_cachemisss_00134": "121380000",
+    "msg_cachemisss_00138": "628120000",
+    "msg_cachemisss_00144": "74756500",
+    "msg_cachemisss_00149": "381260000",
+    "msg_cachemisss_00154": "554100000",
+    "msg_cachemisss_00161": "65567000",
+    "msg_cachemisss_00165": "37164250",
+    "msg_cachemisss_00171": "73830750",
+    "msg_cachemisss_00176": "708970000",
+    "msg_cachemisss_00184": "25532500",
+    "msg_cachemisss_00187": "105791250",
+    "msg_cachemisss_00194": "30357500",
+    "msg_cachemisss_00200": "5699600",
+    "msg_cachemisss_00209": "9845500",
+    "msg_cachemisss_00216": "513060000",
+    "msg_cachemisss_00223": "93240750",
+    "msg_cachemisss_00231": "580600000",
+    "msg_cachemisss_00236": "131262000",
+    "msg_cachemisss_00243": "85230750",
+    "msg_cachemisss_00250": "679420000",
+    "msg_cachemisss_00256": "45497000",
+    "msg_cachemisss_00260": "58333500",
+    "msg_cachemisss_00266": "99454750",
+    "msg_cachemisss_00272": null,
+    "msg_cachemisss_00276": "72800000",
+    "msg_cachemisss_00281": "449020000",
+    "msg_cachemisss_00288": "491180000",
+    "msg_cachemisss_00296": "79700000",
+    "msg_cachemisss_00302": "100778500",
+    "msg_cachemisss_00307": "611740000",
+    "msg_cachemisss_00314": "38417750",
+    "msg_cachemisss_00319": "63892750",
+    "msg_cachemisss_00327": "333830000",
+    "msg_cachemisss_00332": "444630000",
+    "msg_cachemisss_00339": "63122000",
+    "msg_cachemisss_00350": "107564000",
+    "msg_cachemisss_00357": "91369500",
+    "msg_cachemisss_00364": "83466000",
+    "msg_cachemisss_00372": "21819900",
+    "msg_cachemisss_00377": "24166100",
+    "msg_cachemisss_00382": "21135000"
+  },
+  "bucketsNano": {
+    "input": "44297000",
+    "output": "2228120000",
+    "cw5m": "173620000",
+    "cw1h": "11461790000",
+    "cacheRead": "480765700"
+  },
+  "webSearchNano": "20000000",
+  "byClassNano": {
+    "main": "14212103100",
+    "subagent": "196489600",
+    "workflow_agent": "0"
+  },
+  "byModelNano": {
+    "claude-fable-5": "6772178000",
+    "claude-fable-5-1": "7140826500",
+    "claude-haiku-4-5": "45902600",
+    "claude-opus-4-8": "106317000",
+    "claude-opus-5": "172781600",
+    "claude-sonnet-5": "150587000"
+  },
+  "sidechainNano": "196489600",
+  "pricedTokens": 1709737,
+  "allTokens": 1709767,
+  "unpriced": [
+    {
+      "model": "claude-imaginary-9",
+      "responses": 1,
+      "tokens": 30
+    }
+  ],
+  "modifiers": {
+    "fast": 1,
+    "geoUs": 1,
+    "ttlEstimated": 1,
+    "webSearchRequests": 2
+  },
+  "delegationShare": {
+    "numNano": "196489600",
+    "denNano": "14408592700"
+  },
+  "cacheHitRate": {
+    "num": 1016618,
+    "den": 1657993
+  },
+  "tools": {
+    "calls": 41,
+    "paired": 41,
+    "status": {
+      "ok": 36,
+      "denied": 0,
+      "shell_exit": 1,
+      "failed": 4,
+      "unpaired": 0
+    },
+    "callsByName": {
+      "Agent": 2,
+      "Bash": 5,
+      "Edit": 7,
+      "Grep": 4,
+      "Read": 11,
+      "WebSearch": 7,
+      "Write": 5
+    },
+    "okEditNewLines": 16,
+    "okWriteLines": 104
+  },
+  "time": {
+    "activeSeconds": 6141,
+    "workBlockSeconds": [
+      13,
+      16,
+      19,
+      20,
+      21,
+      23,
+      30,
+      33,
+      48,
+      49,
+      75,
+      78,
+      110,
+      142,
+      408,
+      498,
+      554,
+      595,
+      615,
+      622,
+      699,
+      734,
+      739
+    ],
+    "agentSeconds": 6276,
+    "agentSecondsByClass": {
+      "main": 6141,
+      "subagent": 135,
+      "workflow_agent": 0
+    }
+  },
+  "prompts": 40,
+  "interrupts": 0,
+  "activeDays": [
+    "2026-03-09",
+    "2026-03-10",
+    "2026-03-11",
+    "2026-03-12",
+    "2026-03-13",
+    "2026-03-14",
+    "2026-03-15",
+    "2026-03-16"
+  ],
+  "longestStreakDays": 8,
+  "peakHourLocal": 14,
+  "rateLimits": {
+    "quotaRejectWindows": 0,
+    "synthetic429Lines": 0
+  },
+  "workflows": {
+    "launched": 0,
+    "started": 0,
+    "result": 0,
+    "failed": 0
+  }
+}
