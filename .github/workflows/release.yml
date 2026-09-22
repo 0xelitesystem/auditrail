@@ -1,0 +1,55 @@
+name: release
+
+# Pushing a version tag (v0.1.1, v0.2.0, ...) publishes that version to npm with provenance.
+# Running it by hand from the Actions tab rehearses the full publish and uploads nothing.
+#
+# Auth: npm tries trusted publishing (OIDC) first, then falls back to the NPM_TOKEN secret
+# if one exists. Neither is needed for a rehearsal.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # signs the provenance statement and is what trusted publishing uses
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Tag matches package.json version
+        if: github.event_name == 'push'
+        run: |
+          want="v$(node -p "require('./package.json').version")"
+          if [ "$want" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match package.json version $want"
+            exit 1
+          fi
+
+      # prepublishOnly runs the tests, checks the fixtures and builds dist/ before either step.
+      - name: Rehearse
+        if: github.event_name == 'workflow_dispatch'
+        run: npm publish --dry-run
+
+      - name: Publish
+        if: github.event_name == 'push'
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
