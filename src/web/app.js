@@ -225,7 +225,9 @@ function stats(items) {
 function table(cols, rows, caption) {
   const head = '<tr>' + cols.map((c) => '<th scope="col"' + (c.num ? ' class="num"' : '') + '>' + esc(c.label) + '</th>').join('') + '</tr>';
   const body = rows.map((r) => '<tr>' + r.map((cell, i) => '<td' + (cols[i] && cols[i].num ? ' class="num"' : '') + '>' + cell + '</td>').join('') + '</tr>').join('');
-  return '<div class="table-wrap"><table><caption class="visually-hidden">' + esc(caption) + '</caption><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>';
+  // The wrapper scrolls sideways on narrow screens, so it is a named, focusable region: a keyboard user can
+  // reach it and scroll it with the arrow keys (WCAG 2.1.1, axe scrollable-region-focusable).
+  return '<div class="table-wrap" tabindex="0" role="region" aria-label="' + esc(caption) + '"><table><caption class="visually-hidden">' + esc(caption) + '</caption><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>';
 }
 
 /**
@@ -752,7 +754,7 @@ function cardSection(card) {
     '<fieldset><legend>Stats on the card</legend><div class="checks">' + checks + '</div>' +
     '<p class="checks"><label><input type="checkbox" data-action="card-include" data-value="rate-limits"' + (card.include.has('rate-limits') ? ' checked' : '') + '> Rate-limit windows (off by default)</label></p></fieldset>' +
     '<p><button type="button" class="primary" data-action="save-card" id="ar-save-card">Save card as PNG</button></p>' +
-    '<div class="manifest"><h3>Manifest: everything on the card</h3><div class="table-wrap"><table id="ar-manifest"><tbody></tbody></table></div></div>' +
+    '<div class="manifest"><h3>Manifest: everything on the card</h3><div class="table-wrap" tabindex="0" role="region" aria-label="Manifest: everything on the card"><table id="ar-manifest"><tbody></tbody></table></div></div>' +
     '<div><label for="ar-alt" class="soft">Alt text for the post</label><textarea id="ar-alt" rows="5" readonly></textarea>' +
     '<p><button type="button" data-action="copy-alt">Copy alt text</button></p></div>' +
     '</div></div></section>';
